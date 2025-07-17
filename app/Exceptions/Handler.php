@@ -2,7 +2,10 @@
 
 namespace App\Exceptions;
 
+use Illuminate\Auth\AuthenticationException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Validation\ValidationException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -30,19 +33,17 @@ class Handler extends ExceptionHandler
 
     public function render($request, Throwable $e)
     {
-        if (class_basename($e) == 'ValidationException') {
-            return response()->json(["errors" => $e->errors(), "message" => $e->getMessage()], 422);
+        if ($e instanceof AuthenticationException) {
+            return response()->json(['error' => 'Unauthenticated'], 401);
         }
-        if (class_basename($e) == 'AuthenticationException') {
-            return response()->json([
-                'success' => false,
-                'message' => $e->getMessage()
-            ], 401);
+
+        if ($e instanceof ValidationException) {
+            return response()->json(['error' => $e->validator->errors()], 422);
         }
-        return response()->json([
-            'error' => [
-                'exception' => class_basename($e) . ' in ' . basename($e->getFile()) . ' line ' . $e->getLine() . ': ' . $e->getMessage(),
-            ]
-        ], 500);
+        if ($e instanceof ModelNotFoundException) {
+            return response()->json(['error' => $e->getMessage()], 404);
+        }
+
+        return parent::render($request, $e);
     }
 }

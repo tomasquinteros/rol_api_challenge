@@ -14,11 +14,11 @@ class AuthService
 
     public function authenticate(array $credentials): array
     {
-        $name = $credentials['name'];
         $email = $credentials['email'];
+        $password = $credentials['password'];
 
         $user = $this->user->getByEmail($email);
-        if (!$user || $user->name !== $name) {
+        if (!$user || !password_verify($password, $user->password)) {
             throw new AuthenticationException('Invalid credentials');
         }
 
