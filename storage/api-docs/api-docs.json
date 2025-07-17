@@ -27,14 +27,14 @@
                             "schema": {
                                 "required": [
                                     "email",
-                                    "name"
+                                    "password"
                                 ],
                                 "properties": {
                                     "email": {
                                         "type": "string",
                                         "format": "email"
                                     },
-                                    "name": {
+                                    "password": {
                                         "type": "string"
                                     }
                                 },
