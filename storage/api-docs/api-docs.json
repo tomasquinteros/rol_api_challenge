@@ -111,13 +111,13 @@
                 ]
             }
         },
-        "/api/auth/revoke-tokens": {
+        "/api/auth/revokeTokensByUser": {
             "post": {
                 "tags": [
                     "Auth"
                 ],
                 "summary": "Revocar todos los tokens del usuario",
-                "operationId": "5ae8a2660e9155c87c410ba4413de110",
+                "operationId": "93888fef34d26a28654abd91d3e740dd",
                 "responses": {
                     "200": {
                         "description": "Tokens revocados exitosamente",
@@ -132,6 +132,10 @@
                                         "message": {
                                             "type": "string",
                                             "example": "Tokens revoked successfully"
+                                        },
+                                        "data": {
+                                            "type": "number",
+                                            "example": 5
                                         }
                                     },
                                     "type": "object"

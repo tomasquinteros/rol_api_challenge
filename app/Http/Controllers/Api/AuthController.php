@@ -118,7 +118,7 @@ class AuthController extends Controller
 
     /**
      * @OA\Post(
-     *     path="/api/auth/revoke-tokens",
+     *     path="/api/auth/revokeTokensByUser",
      *     summary="Revocar todos los tokens del usuario",
      *     tags={"Auth"},
      *     security={{"Bearer": {}}},
@@ -127,7 +127,8 @@ class AuthController extends Controller
      *         description="Tokens revocados exitosamente",
      *         @OA\JsonContent(
      *             @OA\Property(property="success", type="boolean", example=true),
-     *             @OA\Property(property="message", type="string", example="Tokens revoked successfully")
+     *             @OA\Property(property="message", type="string", example="Tokens revoked successfully"),
+     *             @OA\Property(property="data", type="number", example=5)
      *         )
      *     ),
      *     @OA\Response(
@@ -149,8 +150,12 @@ class AuthController extends Controller
                 throw new AuthenticationException('Unauthenticated', [], '', 401);
             }
 
-            return $this->authService->revokeTokensByUser($user);
-
+            $tokensDeleted = $this->authService->revokeTokensByUser($user);
+            return response()->json([
+                'success' => true,
+                'message' => 'Tokens revoked successfully',
+                'data' => $tokensDeleted
+            ], 200);
         } catch (AuthenticationException|Exception $e) {
             return response()->json([
                 'success' => false,
