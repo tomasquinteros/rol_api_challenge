@@ -13,6 +13,11 @@ Se puede utilizar
 | /api/users                                        | GET        | Obtener todos los usuarios con paginacion. Parametros opcionales: `page` : numero de pagina, `limit` : cantidad de usuarios por pagina, `name`: filtrar por nombre |
 | **navegador**                                     | **description**                           |
 | /api/documentation                                | Se utiliza swagger para la documentacion. |
+
+## Login para prueba:
+`name` => admin
+`email` => admin@admin.com
+
 ## ✅ Requisitos
 
 ### Opción 1: Instalación clásica
