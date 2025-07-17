@@ -1,6 +1,6 @@
 # API - Users - Auth
 [![Laravel](https://img.shields.io/badge/laravel-10-blue.svg?style=for-the-badge)](https://laravel.com)
-[!Swagger](https://img.shields.io/badge/-Swagger-%23Clojure?style=for-the-badge&logo=swagger&logoColor=white)
+![Swagger](https://img.shields.io/badge/-Swagger-%23Clojure?style=for-the-badge&logo=swagger&logoColor=white)
 
 ## API Reference
 Se puede utilizar
