@@ -12,7 +12,8 @@ Se puede utilizar
 | /api/auth/logout                                  | POST       | Logout de usuario                                                                                                                                                  |
 | /api/auth/revokeTokensByUser                      | POST       | Eliminar tokens de usuario                                                                                                                                         |
 | /api/users                                        | GET        | Obtener todos los usuarios con paginacion. Parametros opcionales: `page` : numero de pagina, `limit` : cantidad de usuarios por pagina, `name`: filtrar por nombre |
-
+| **navegador**                                     | **description**                           |
+| /api/documentation                                | Se utiliza swagger para la documentacion. |
 ## ✅ Requisitos
 
 ### Opción 1: Instalación clásica
@@ -55,8 +56,9 @@ php artisan key:generate
 
 # 7. Ejecutar migraciones y seeders
 php artisan migrate --seed
-
-# 8. Levantar servidor
+# 8. Generar o actualizar la documentación Swagger
+php artisan l5-swagger:generate
+# 9. Levantar servidor
 php artisan serve
 ```
 ## 🚀 Instalación con Docker
@@ -83,6 +85,7 @@ docker-compose up -d --build
 docker exec -it app bash
 composer install
 php artisan key:generate
+php artisan l5-swagger:generate
 php artisan migrate
 exit
 ```
