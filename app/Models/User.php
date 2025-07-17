@@ -3,16 +3,17 @@
 namespace App\Models;
 
 use App\Interfaces\UserInterface;
+use Database\Factories\UserFactory;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Pagination\LengthAwarePaginator;
 use Laravel\Sanctum\HasApiTokens;
-use Ramsey\Collection\Collection;
 
 class User extends Authenticatable implements UserInterface
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
+    /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable, HasApiTokens;
 
     /**
@@ -49,28 +50,21 @@ class User extends Authenticatable implements UserInterface
         ];
     }
 
-    public function getAll(int $limit): LengthAwarePaginator
+    public function getAll(): Builder
     {
-        $users = self::paginate($limit);
-
-        if (empty($users)) abort(404, "No se han encontrado usuarios.");
-
-        return $users;
+        return self::query();
     }
 
-    public function getByName(string $name, int $limit): LengthAwarePaginator
+    public function getByName(string $name): Builder
     {
-        $users = self::where('name', 'like' ,"%$name%")->paginate($limit);
-        if ($users->count() === 0) abort(404, "No se han encontrado usuarios con el nombre: $name");
-
-        return $users;
+        return self::where('name', 'like' ,"%$name%");
     }
 
     public function getByEmail(string $email): User
     {
         $user = self::where('email', $email)->first();
 
-        if (empty($user)) abort(404, "No se han encontrado usuarios con el email: $email");
+        if (empty($user)) throw new ModelNotFoundException("No user has been found with that email address.", 404);
 
         return $user;
     }
