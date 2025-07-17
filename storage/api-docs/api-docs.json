@@ -27,14 +27,14 @@
                             "schema": {
                                 "required": [
                                     "email",
-                                    "name"
+                                    "password"
                                 ],
                                 "properties": {
                                     "email": {
                                         "type": "string",
                                         "format": "email"
                                     },
-                                    "name": {
+                                    "password": {
                                         "type": "string"
                                     }
                                 },
@@ -183,6 +183,16 @@
                         "schema": {
                             "type": "string",
                             "example": "admin"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Pagina de resultados",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "example": "2"
                         }
                     }
                 ],

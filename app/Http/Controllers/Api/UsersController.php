@@ -42,6 +42,13 @@ class UsersController extends Controller
      *         description="Nombre de usuario a buscar",
      *         @OA\Schema(type="string", example="admin")
      *     ),
+     *     @OA\Parameter(
+     *         name="page",
+     *         in="query",
+     *         required=false,
+     *         description="Pagina de resultados",
+     *         @OA\Schema(type="integer", example="2")
+     *     ),
      *     @OA\Response(
      *         response=200,
      *         description="Lista de usuarios",
