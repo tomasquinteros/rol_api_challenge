@@ -24,7 +24,10 @@ Se puede utilizar
 
 
 ### Opción 2: Usar Docker (Recomendado para evitar conflictos de entorno)
-
+- [Docker Engine](https://docs.docker.com/get-docker/) instalado (v20+ recomendado)
+- [Docker Compose](https://docs.docker.com/compose/install/) instalado (v2.0+ recomendado)
+- Sistema operativo compatible (Linux, macOS, Windows con WSL2)
+- Puerto `80` o `8000` libre para exponer la aplicación
 
 ## 🚀 Instalación Clásica
 
@@ -56,11 +59,11 @@ php artisan migrate --seed
 # 8. Levantar servidor
 php artisan serve
 ```
-## 🚀 Instalación Clásica
+## 🚀 Instalación con Docker
 ```
 # 1. Clonar el repositorio
-git clone https://github.com/usuario/mi-proyecto-laravel.git
-cd mi-proyecto-laravel
+git clone https://github.com/tomasquinteros/rol_api_challenge.git
+cd rol_api_challenge
 
 # 2. Copiar archivo de entorno
 cp .env.example .env
