@@ -184,6 +184,16 @@
                             "type": "string",
                             "example": "admin"
                         }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Pagina de resultados",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "example": "2"
+                        }
                     }
                 ],
                 "responses": {
