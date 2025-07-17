@@ -49,18 +49,18 @@ class User extends Authenticatable implements UserInterface
         ];
     }
 
-    public function getAll(): LengthAwarePaginator
+    public function getAll(int $limit): LengthAwarePaginator
     {
-        $users = self::paginate(15);
+        $users = self::paginate($limit);
 
         if (empty($users)) abort(404, "No se han encontrado usuarios.");
 
         return $users;
     }
 
-    public function getByName(string $name): LengthAwarePaginator
+    public function getByName(string $name, int $limit): LengthAwarePaginator
     {
-        $users = self::where('name', 'like' ,"%$name%")->paginate(15);
+        $users = self::where('name', 'like' ,"%$name%")->paginate($limit);
         if ($users->count() === 0) abort(404, "No se han encontrado usuarios con el nombre: $name");
 
         return $users;

@@ -7,9 +7,9 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 interface UserInterface
 {
-    public function getAll(): LengthAwarePaginator;
+    public function getAll(int $limit): LengthAwarePaginator;
 
-    public function getByName(string $name): LengthAwarePaginator;
+    public function getByName(string $name, int $limit): LengthAwarePaginator;
 
     public function getByEmail(string $email): User;
 }
