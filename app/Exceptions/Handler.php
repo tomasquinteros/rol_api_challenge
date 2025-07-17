@@ -27,4 +27,22 @@ class Handler extends ExceptionHandler
             //
         });
     }
+
+    public function render($request, Throwable $e)
+    {
+        if (class_basename($e) == 'ValidationException') {
+            return response()->json(["errors" => $e->errors(), "message" => $e->getMessage()], 422);
+        }
+        if (class_basename($e) == 'AuthenticationException') {
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage()
+            ], 401);
+        }
+        return response()->json([
+            'error' => [
+                'exception' => class_basename($e) . ' in ' . basename($e->getFile()) . ' line ' . $e->getLine() . ': ' . $e->getMessage(),
+            ]
+        ], 500);
+    }
 }
