@@ -3,20 +3,20 @@
 ![Swagger](https://img.shields.io/badge/-Swagger-%23Clojure?style=for-the-badge&logo=swagger&logoColor=white)
 
 ## API Reference
-Se puede utilizar
 
-| **endpoint**                                      | **method** | **description**                                                                                                                                                    |
-|---------------------------------------------------|------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| /api/auth/login                                   | POST       | Logueo de usuario                                                                                                                                                  |
-| /api/auth/logout                                  | POST       | Logout de usuario                                                                                                                                                  |
-| /api/auth/revokeTokensByUser                      | POST       | Eliminar tokens de usuario                                                                                                                                         |
-| /api/users                                        | GET        | Obtener todos los usuarios con paginacion. Parametros opcionales: `page` : numero de pagina, `limit` : cantidad de usuarios por pagina, `name`: filtrar por nombre |
-| **navegador**                                     | **description**                           |
-| /api/documentation                                | Se utiliza swagger para la documentacion. |
+| **Endpoint**                   | **Método** | **Descripción**                                                               | **Ejemplo de Solicitud**                                                          |
+| ------------------------------ | ---------- | ----------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| `/api/auth/login`              | `POST`     | Logueo de usuario                                                             | `{ "email": "usuario@ejemplo.com", "password": "contraseña" }`                    |
+| `/api/auth/logout`             | `POST`     | Logout de usuario                                                             | Header: `Authorization: Bearer <access_token>`                                    |
+| `/api/auth/revokeTokensByUser` | `POST`     | Eliminar tokens del usuario                                                   | Header: `Authorization: Bearer <access_token>`                                    |
+| `/api/users`                   | `GET`      | Obtener usuarios con paginación y filtros opcionales: `name`, `limit`, `page` | `/api/users?name=juan&limit=10&page=2` <br> `/api/users?page=2` <br> `/api/users` |
+| `/api/documentation`           | `GET`      | Documentación Swagger                                                         | URL para acceder a la documentación de la API                                     |
+
+
 
 ## Login para prueba:
-`name` => admin
 `email` => admin@admin.com
+`password` => admin123
 
 ## ✅ Requisitos
 
@@ -53,7 +53,6 @@ touch database/database.sqlite
 # 5. Configurar el archivo .env para usar SQLite:
 # (Editar las siguientes líneas en .env)
 DB_CONNECTION=sqlite
-DB_DATABASE=${PWD}/database/database.sqlite
 
 # 6. Generar la key de la app
 php artisan key:generate
